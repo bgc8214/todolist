@@ -96,5 +96,36 @@
         });
 
 
+        // All, Active, Completed 버튼 클릭 동작
+        $(document).on("click", "a[href$='#/']", function (event) {
+            $("a[href$='#/']").addClass("selected");
+            $("a[href$='#/active']").removeClass("selected");
+            $("a[href$='#/completed']").removeClass("selected");
+        });
+
+        $(document).on("click", "a[href$='#/active']", function (event) {
+            event.preventDefault();
+            $("a[href$='#/active']").addClass("selected");
+            $("a[href$='#/']").removeClass("selected");
+            $("a[href$='#/completed']").removeClass("selected");
+        });
+        $(document).on("click", "a[href$='#/completed']", function (event) {
+            event.preventDefault();
+            $("a[href$='#/completed']").addClass("selected");
+            $("a[href$='#/']").removeClass("selected");
+            $("a[href$='#/active']").removeClass("selected");
+        });
+
+
+        $(document).on("click", ".toggle-all", function () {
+            if ($('.toggle-all').prop("checked")) {
+                $('.toggle:not(:checked)').click()
+            }
+            else {
+                $('.toggle').click();
+            }
+        });
+
+
     });
 })(window);
