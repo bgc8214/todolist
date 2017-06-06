@@ -24,5 +24,10 @@ public class TodoService {
 	public Collection<Todo> findAll() {
 		return dao.selectAll();
 	}
+	
+	public int deleteById(Integer id){
+		int cnt = dao.deleteById(id);
+		return cnt;
+	}
 
 }

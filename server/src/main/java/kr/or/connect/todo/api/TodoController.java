@@ -4,7 +4,9 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,11 +37,18 @@ public class TodoController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	Todo createTodo(@RequestBody Todo Todo) {
-		System.out.println("make : " + Todo);
-		Todo newTodo = service.create(Todo);
+	Todo createTodo(@RequestBody Todo todo) {
+		System.out.println("make : " + todo);
+		Todo newTodo = service.create(todo);
 		System.out.println("new : " + newTodo);
 		return newTodo;
+	}
+	
+	@DeleteMapping("/{id}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	void deleteById(@PathVariable Integer id) {
+		System.out.println("삭제할 아이디 : "+id);
+		service.deleteById(id);
 	}
 
 }
