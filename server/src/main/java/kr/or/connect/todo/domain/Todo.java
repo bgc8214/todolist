@@ -5,8 +5,19 @@ import java.util.Date;
 public class Todo {
 	private Integer id;
 	private String todo;
-	private boolean completed;
+	private Integer completed;
 	private Date date;
+	
+	
+	
+	public Todo(String todo, Integer completed) {
+		super();
+		this.todo = todo;
+		this.completed = completed;
+	}
+	public Todo() {
+		super();
+	}
 	public Integer getId() {
 		return id;
 	}
@@ -19,10 +30,10 @@ public class Todo {
 	public void setTodo(String todo) {
 		this.todo = todo;
 	}
-	public boolean isCompleted() {
+	public Integer isCompleted() {
 		return completed;
 	}
-	public void setCompleted(boolean completed) {
+	public void setCompleted(Integer completed) {
 		this.completed = completed;
 	}
 	public Date getDate() {

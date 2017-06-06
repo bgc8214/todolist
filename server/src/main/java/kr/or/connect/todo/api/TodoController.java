@@ -32,23 +32,19 @@ public class TodoController {
 
 	@GetMapping
 	Collection<Todo> readTodoList() {
-		System.out.println("Read All");
 		return service.findAll();
 	}
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	Todo createTodo(@RequestBody Todo todo) {
-		System.out.println("make : " + todo);
 		Todo newTodo = service.create(todo);
-		System.out.println("new : " + newTodo);
 		return newTodo;
 	}
 	
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	void deleteById(@PathVariable Integer id) {
-		System.out.println("삭제할 아이디 : "+id);
 		service.deleteById(id);
 	}
 	
@@ -61,7 +57,6 @@ public class TodoController {
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	void update(@PathVariable Integer id, @RequestBody Todo todo) {
-		System.out.println("업데이트할 아이디 : " +id);
 		todo.setId(id);
 		service.updateOne(todo);
 	}
