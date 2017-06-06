@@ -43,6 +43,11 @@ public class TodoDao {
 		return jdbc.update(TodoSqls.DELETE_BY_ID, params);
 	}
 	
+	public Integer deleteByCompleted(Integer completed){
+		Map<String, ?> params = Collections.singletonMap("completed", completed);
+		return jdbc.update(TodoSqls.DELETE_BY_COMPLETED, params);
+	}
+	
 	public Integer updateOne(Todo todo){
 		SqlParameterSource params = new BeanPropertySqlParameterSource(todo);
 		return jdbc.update(TodoSqls.UPDATE_ONE, params);

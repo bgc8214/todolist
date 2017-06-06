@@ -30,6 +30,11 @@ public class TodoService {
 		return cnt;
 	}
 	
+	public int deleteByCompleted(Integer completed){
+		int cnt = dao.deleteByCompleted(completed);
+		return cnt;
+	}
+	
 	public int updateOne(Todo todo){
 		int cnt = dao.updateOne(todo);
 		return cnt;

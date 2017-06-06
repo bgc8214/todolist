@@ -101,6 +101,7 @@
             $("a[href$='#/']").addClass("selected");
             $("a[href$='#/active']").removeClass("selected");
             $("a[href$='#/completed']").removeClass("selected");
+            $('.todo-list').find('li').show();
         });
 
         $(document).on("click", "a[href$='#/active']", function (event) {
@@ -108,22 +109,35 @@
             $("a[href$='#/active']").addClass("selected");
             $("a[href$='#/']").removeClass("selected");
             $("a[href$='#/completed']").removeClass("selected");
+            $('.todo-list').find('li').show();
+            $('.completed').hide();
         });
         $(document).on("click", "a[href$='#/completed']", function (event) {
             event.preventDefault();
             $("a[href$='#/completed']").addClass("selected");
             $("a[href$='#/']").removeClass("selected");
             $("a[href$='#/active']").removeClass("selected");
+            $('.todo-list').find('li').hide();
+            $('.completed').show();
         });
 
 
         $(document).on("click", ".toggle-all", function () {
-            if ($('.toggle-all').prop("checked")) {
-                $('.toggle:not(:checked)').click()
+            if ($(this).prop("checked") == true) {
+                $('.toggle').prop("checked", true);
+            } else {
+                $('.toggle').prop("checked", false);
             }
-            else {
-                $('.toggle').click();
-            }
+        })
+
+        $(document).on("click", ".clear-completed", function () {
+            $.ajax({
+                type: 'DELETE',
+                url: './api/todos/completed',
+                success: function () {
+                    $('.completed').remove();
+                }
+            });
         });
 
 
