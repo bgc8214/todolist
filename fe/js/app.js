@@ -55,7 +55,9 @@
                 type: "DELETE",
                 success: function () {
                     clickedList.parents("li").remove();
-                    listCount--;
+                    if(clickedList.siblings('.toggle').prop("checked") == false){
+                        listCount--;
+                    }
                     $('.todo-count').find('strong').text(listCount);
                 },
                 error: function () {
@@ -124,12 +126,13 @@
 
         $(document).on("click", ".toggle-all", function () {
             if ($(this).prop("checked") == true) {
-                $('.toggle').prop("checked", true);
+                $('.toggle:not(:checked)').click()
             } else {
-                $('.toggle').prop("checked", false);
+                $('.toggle').click();
             }
         })
 
+        //완료된것 모두 주지우기
         $(document).on("click", ".clear-completed", function () {
             $.ajax({
                 type: 'DELETE',
