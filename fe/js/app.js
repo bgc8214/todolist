@@ -7,11 +7,11 @@
             success: function (result) {
                 for (var i = 0; i < result.length; i++) {
                     var todo;
-                    if (result.completed) { //완료된 것
-                        todo = "<li id=" + result[i].id + "class='completed'><div class='view'><input class='toggle' type='checkbox' checked></input><label>"
+                    if (result[i].completed) { //완료된 것
+                        todo = "<li id=" + result[i].id + " class='completed'><div class='view'><input class='toggle' type='checkbox' checked></input><label>"
                             + result[i].todo + "</label><button class='destroy'></button></div><input class='edit' value='Create a TodoMVC template'></input></li>";
                     } else {
-                        todo = "<li id=" + result[i].id + "><div class='view'><input class='toggle' type='checkbox'></input><label>"
+                        todo = "<li id=" + result[i].id + " ><div class='view'><input class='toggle' type='checkbox'></input><label>"
                             + result[i].todo + "</label><button class='destroy'></button></div><input class='edit' value='Create a TodoMVC template'></input></li>";
                         listCount++;
                     }
@@ -48,10 +48,10 @@
 
 
         //삭제
-        $(document).on("click",".destroy",function(){
+        $(document).on("click", ".destroy", function () {
             var clickedList = $(this);
             $.ajax({
-                url: "/api/todos/"+ $(this).parents("li").attr("id"),
+                url: "/api/todos/" + $(this).parents("li").attr("id"),
                 type: "DELETE",
                 success: function () {
                     clickedList.parents("li").remove();
@@ -63,5 +63,38 @@
                 }
             });
         });
+
+        //완료 버튼 눌렀을 때, 업데이트
+        $(document).on("change", ".toggle", function () {
+            var clickedList = $(this);
+            if ($(this).is(":checked")) {
+                $.ajax({
+                    url: "/api/todos/" + $(this).parents("li").attr("id"),
+                    type: "PUT",
+                    data: '{"completed" : ' + 1 + '}',
+                    contentType: 'application/json',
+                    success: function () {
+                        clickedList.parents("li").addClass(" completed");
+                        listCount--;
+                        $('.todo-count').find('strong').text(listCount);
+                    }
+                });
+            }
+            else {
+                $.ajax({
+                    url: "/api/todos/" + $(this).parents("li").attr("id"),
+                    type: "PUT",
+                    data: '{"completed" : ' + 0 + '}',
+                    contentType: 'application/json',
+                    success: function () {
+                        clickedList.parents("li").removeClass("completed");
+                        listCount++;
+                        $('.todo-count').find('strong').text(listCount);
+                    }
+                });
+            }
+        });
+
+
     });
 })(window);

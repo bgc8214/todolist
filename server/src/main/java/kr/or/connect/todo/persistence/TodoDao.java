@@ -42,5 +42,10 @@ public class TodoDao {
 		Map<String, ?> params = Collections.singletonMap("id", id);
 		return jdbc.update(TodoSqls.DELETE_BY_ID, params);
 	}
+	
+	public Integer updateOne(Todo todo){
+		SqlParameterSource params = new BeanPropertySqlParameterSource(todo);
+		return jdbc.update(TodoSqls.UPDATE_ONE, params);
+	}
 
 }

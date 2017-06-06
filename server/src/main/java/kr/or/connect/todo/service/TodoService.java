@@ -29,5 +29,10 @@ public class TodoService {
 		int cnt = dao.deleteById(id);
 		return cnt;
 	}
+	
+	public int updateOne(Todo todo){
+		int cnt = dao.updateOne(todo);
+		return cnt;
+	}
 
 }
