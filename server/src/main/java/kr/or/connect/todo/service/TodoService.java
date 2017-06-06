@@ -17,7 +17,7 @@ public class TodoService {
 
 	public Todo create(Todo todo) {
 		Integer id = dao.insert(todo);
-		todo.setId(id);
+		todo.setId(id); 
 		return todo;
 	}
 
